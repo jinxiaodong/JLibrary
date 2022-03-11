@@ -1,6 +1,6 @@
 package com.jarvis.lib.network.config
 
-import com.jarvis.libbase.BuildConfig
+import com.jarvis.lib.BuildConfig
 import java.io.IOException
 import java.io.InputStream
 import java.security.KeyManagementException

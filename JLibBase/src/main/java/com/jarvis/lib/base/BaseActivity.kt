@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LiveData
 import com.gyf.immersionbar.ImmersionBar
-import com.jarvis.libbase.R
+import com.jarvis.lib.R
 import com.jarvis.lib.ktx.bindView
 import com.jarvis.lib.ktx.viewLifeCycleOwner
 import com.jarvis.lib.liveData.observeLoadingUI

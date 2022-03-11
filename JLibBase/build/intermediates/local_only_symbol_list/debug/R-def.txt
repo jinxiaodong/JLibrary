@@ -1,0 +1,24 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color btn1
+color color_008577
+color color_0099ff
+color color_3e3e3e
+color purple_200
+color purple_500
+color purple_700
+color teal_200
+color teal_700
+color white
+drawable lib_ic_loading
+drawable lib_shape_load_bg
+id iv_image
+id layout_refresh
+id recycler_view
+id refresh_footer
+id refresh_header
+id tv_message
+layout layout_loading_view
+layout layout_refresh_list
+style LoadingDialog

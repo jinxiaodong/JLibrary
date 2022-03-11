@@ -1,8 +1,9 @@
 plugins {
     id 'com.android.library'
     id 'kotlin-android'
-    id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'com.jarvis.plugin.version'
+
 }
 
 android {
@@ -11,8 +12,6 @@ android {
     defaultConfig {
         minSdk BuildVersion.minSdkVersion
         targetSdk BuildVersion.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -86,9 +85,8 @@ dependencies {
     kapt Androidx.room_compiler
 
 
-
-//    api Tests.junit
-//    api Tests.androidx_junit
-//    api "junit:junit:4.13.2"
-//    api Tests.espresso
+    api Tests.junit
+    api Tests.androidx_junit
+    api "junit:junit:4.13.2"
+    api Tests.espresso
 }

@@ -7,7 +7,7 @@ import android.view.animation.Animation
 import android.view.animation.RotateAnimation
 import android.widget.ImageView
 import android.widget.TextView
-import com.jarvis.libbase.R
+import com.jarvis.lib.R
 
 /**
  * @author jinxiaodong
