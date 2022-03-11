@@ -1,8 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
-    id "com.jarvis.plugin.version"
-
+    id 'com.jarvis.plugin.version'
 }
 
 android {
@@ -34,6 +33,5 @@ android {
 }
 
 dependencies {
-
   implementation project(":JLibBase")
 }

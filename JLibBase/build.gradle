@@ -3,7 +3,6 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'com.jarvis.plugin.version'
-
 }
 
 android {
@@ -37,7 +36,14 @@ android {
     }
 }
 
+configurations.all {
+// check for updates every build
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
 dependencies {
+    //version管理插件
+    api('com.jarvis.plugin:version:0.0.2-SNAPSHOT')
 
     api Kotlin.kotlin_stdlib
     api Kotlin.kotlin_reflect
@@ -87,6 +93,7 @@ dependencies {
 
     api Tests.junit
     api Tests.androidx_junit
-    api "junit:junit:4.13.2"
     api Tests.espresso
 }
+
+apply from: '../publish.gradle'

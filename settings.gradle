@@ -8,7 +8,13 @@ pluginManagement {
             url 'http://localhost:8081/artifactory/android'
         }
     }
-
+    resolutionStrategy {
+        eachPlugin {
+            if (requested.id.id == 'com.jarvis.plugin.version') {
+                useModule("com.jarvis.plugin:version:0.0.2-SNAPSHOT")
+            }
+        }
+    }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -22,6 +28,4 @@ dependencyResolutionManagement {
 rootProject.name = "JLibrary"
 include ':app'
 include ':JLibBase'
-
-includeBuild(new File(settingsDir, "../JVersionManager"))
 

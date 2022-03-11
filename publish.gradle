@@ -1,0 +1,90 @@
+apply plugin: 'maven-publish'
+
+def userName = 'admin'
+def passWord = 'admin'
+
+def releaseUrl = "http://localhost:8081/artifactory/jarvis_android_lib/"
+def localUrl = "http://localhost:8081/artifactory/jarvis_android_lib/"
+
+
+task generateSourcesJar(type: Jar) {
+
+    if (project.hasProperty("android")) {
+        from android.sourceSets.main.java.sourceFiles
+    } else {
+        from sourceSets.main.allSource
+    }
+
+    classifier 'sources'
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            release(MavenPublication) {
+                // You can then customize attributes of the publication as shown below.
+                groupId = GROUP
+                artifactId = ARTIFACTID
+                version = VERSION_NAME
+
+                if (project.hasProperty("android")) {
+                    artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+                } else {
+                    artifact("$buildDir/libs/${project.getName()}.jar")
+                    artifact generateSourcesJar
+                }
+                //依赖关系
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode("dependencies")
+                    configurations.implementation.allDependencies.forEach() {
+                        Dependency dependency ->
+                            if (dependency.version != "unspecified" && dependency.name != "unspecified") {
+                                def dependencyNode = dependenciesNode.appendNode('dependency')
+                                dependencyNode.appendNode('groupId', dependency.group)
+                                dependencyNode.appendNode('artifactId', dependency.name)
+                                dependencyNode.appendNode('version', dependency.version)
+                            }
+                    }
+                }
+            }
+            // Creates a Maven publication called “debug”.
+            debug(MavenPublication) {
+                groupId = GROUP
+                artifactId = ARTIFACTID
+                version = VERSION_NAME_SNAPSHOT
+
+                if (project.hasProperty("android")) {
+                    artifact("$buildDir/outputs/aar/${project.getName()}-debug.aar")
+                } else {
+                    artifact("$buildDir/libs/${project.getName()}.jar")
+                    artifact generateSourcesJar
+                }
+                //依赖关系
+                pom.withXml {
+                    def dependenciesNode = asNode().appendNode("dependencies")
+                    configurations.implementation.allDependencies.forEach() {
+                        Dependency dependency ->
+                            if (dependency.version != "unspecified" && dependency.name != "unspecified") {
+                                def dependencyNode = dependenciesNode.appendNode('dependency')
+                                dependencyNode.appendNode('groupId', dependency.group)
+                                dependencyNode.appendNode('artifactId', dependency.name)
+                                dependencyNode.appendNode('version', dependency.version)
+                            }
+                    }
+                }
+            }
+        }
+
+        repositories {
+            maven {
+                allowInsecureProtocol = true
+                credentials {
+                    username = userName
+                    password = passWord
+                }
+                url = localUrl
+            }
+        }
+    }
+}
